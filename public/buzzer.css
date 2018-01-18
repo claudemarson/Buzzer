@@ -1,0 +1,74 @@
+html, body, form{
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    overflow: hidden;
+}
+
+/* buzzer1 */
+.buzzer1 button{
+    width: 100%;
+    height: 100%;
+    background-color: #ff1702;
+    background-image: radial-gradient(circle at 70% 70%, #ffe0dd 0%, rgba(255,224,221,0) 39%), radial-gradient(circle closest-side at center, #ff1702 99%, #ffe0dd 100%);
+    color: white;
+    border-style: none;
+    font-family: "Impact";
+    font-size: 2em;
+    letter-spacing: 4px;
+}
+.buzzer1 button:active{
+    background-color: maroon;
+    background: radial-gradient(circle closest-side at center, maroon 119%, #ffe0dd 120%);
+}
+
+/* buzzer2 */
+.buzzer2 form{
+    padding: 10px;
+}
+.buzzer2 label > *, .buzzer2 button{
+    display: block;
+    font-size: 150%;
+}
+.buzzer2 input, .buzzer2 button{
+    width: 15em;
+    max-width: 90%;
+    margin-bottom: 10px;
+}
+
+/* buzzer3 */
+.buzzer3 form{
+    text-align: center;
+    display: flex;
+}
+.buzzer3 button{
+    width: 32%;
+    height: 100%;
+    padding: 0px;
+    font-family: "Impact";
+    font-size: 600%;
+    flex: 1;
+    border: none;
+}
+.buzzer3 .a{
+    background-color: #f4f53e;
+}
+.buzzer3 .b{
+    background-color: #71e040;
+}
+.buzzer3 .c{
+    background-color: #14cde8;
+}
+
+/* login */
+.login form{
+    padding: 10px;
+}
+.login label > *, .login button, .login strong{
+    display: block;
+    font-size: 150%;
+}
+.login input{
+    width: 15em;
+    max-width: 90%;
+}
