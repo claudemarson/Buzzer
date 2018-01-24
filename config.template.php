@@ -1,6 +1,11 @@
 <?php
 
 /**
+ * @var string UI language, one of 'de', 'en', 'fr', 'lb'
+ */
+define('LANG', '');
+
+/**
  * @var string Host name of the database server
  */
 define('DB_HOST', '');

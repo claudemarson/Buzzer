@@ -3,6 +3,7 @@
 require_once '../autoload.php';
 
 use Buzzer\Database;
+use Buzzer\Locale;
 
 $db = new Database();
 
@@ -26,11 +27,13 @@ if (isset($_POST['reset'])) {
 $currentBuzzerType = $db->getCurrentBuzzerType();
 $db->close();
 
+Locale::loadLanguage();
+
 ?><!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8"/>
-        <title>Buzzer administrion panel</title>
+        <title><?= LANG_BUZZER_ADMINISTRATION ?></title>
         <style>
             form{
                 display: flex;
@@ -46,20 +49,20 @@ $db->close();
     <body>
         <form action="admin.php" method="post">
             <fieldset>
-                <legend>Clear the screen</legend>
-                <button type="submit" name="reset">Reset</button>
+                <legend><?= LANG_CLEAR_THE_SCREEN ?></legend>
+                <button type="submit" name="reset"><?= LANG_RESET ?></button>
             </fieldset>
             <fieldset>
-                <legend>Reveal or hide all answers</legend>
-                <button name="reveal" value="1">Hide</button>
-                <button name="reveal" value="2">Reveal</button>
+                <legend><?= LANG_REVEAL_ALL_ANSWERS ?></legend>
+                <button name="reveal" value="1"><?= LANG_HIDE ?></button>
+                <button name="reveal" value="2"><?= LANG_REVEAL ?></button>
             </fieldset>
             <fieldset>
-                <legend>Buzzer type</legend>
-                <label><input type="radio" name="buzzertype" value="1"<?= ($currentBuzzerType === 1) ? ' checked="checked"' : '' ?>/>Buzzer</label>
-                <label><input type="radio" name="buzzertype" value="2"<?= ($currentBuzzerType === 2) ? ' checked="checked"' : '' ?>/>Text field</label>
-                <label><input type="radio" name="buzzertype" value="3"<?= ($currentBuzzerType === 3) ? ' checked="checked"' : '' ?>/>3 options</label>
-                <button type="submit">OK</button>
+                <legend><?= LANG_BUZZER_TYPE ?></legend>
+                <label><input type="radio" name="buzzertype" value="1"<?= ($currentBuzzerType === 1) ? ' checked="checked"' : '' ?>/><?= LANG_BUZZER ?></label>
+                <label><input type="radio" name="buzzertype" value="2"<?= ($currentBuzzerType === 2) ? ' checked="checked"' : '' ?>/><?= LANG_TEXT_FIELD ?></label>
+                <label><input type="radio" name="buzzertype" value="3"<?= ($currentBuzzerType === 3) ? ' checked="checked"' : '' ?>/><?= LANG_3_OPTIONS ?></label>
+                <button type="submit"><?= LANG_OK ?></button>
             </fieldset>
         </form>
     </body>

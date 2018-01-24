@@ -1,8 +1,16 @@
-<!DOCTYPE html>
+<?php
+
+require_once '../autoload.php';
+
+use Buzzer\Locale;
+
+Locale::loadLanguage();
+
+?><!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8"/>
-        <title>Screen</title>
+        <title><?= LANG_SCREEN ?></title>
         <style>
             div{
                 background-image: linear-gradient(to bottom, #3b679e 0%, #2b88d9 50%, #207cca 51%, #7db9e8 100%);

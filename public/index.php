@@ -3,6 +3,7 @@
 require_once '../autoload.php';
 
 use Buzzer\Database;
+use Buzzer\Locale;
 
 $db = null;
 $loggedIn = false;
@@ -32,6 +33,8 @@ if (isset($_COOKIE['team']) && is_numeric($_COOKIE['team'])) {
     }
 
 }
+
+Locale::loadLanguage();
 
 if ($loggedIn) {
 
@@ -71,7 +74,7 @@ if ($loggedIn) {
                     <meta charset="utf-8"/>
                     <link href="./buzzer.css" rel="stylesheet" type="text/css"/>
                     <meta name="viewport" content="width=device-width, user-scalable=no"/>
-                    <title>Buzzer</title>
+                    <title><?= LANG_BUZZER ?></title>
                 </head>
                 <body>
                     <form action="./" method="post">
@@ -92,14 +95,14 @@ if ($loggedIn) {
                     <meta charset="utf-8"/>
                     <link href="./buzzer.css" rel="stylesheet" type="text/css"/>
                     <meta name="viewport" content="width=device-width, user-scalable=no"/>
-                    <title>Buzzer</title>
+                    <title><?= LANG_BUZZER ?></title>
                 </head>
                 <body>
                     <form action="./" method="post">
                         <input type="hidden" name="buzzertype" value="2"/>
                         <input type="hidden" name="team" value="<?= htmlspecialchars($teamID) ?>"/>
-                        <label><span>Answer:</span> <input name="answer" maxlength="50"/></label>
-                        <button type="submit">OK</button>
+                        <label><span><?= LANG_ANSWER ?>:</span> <input name="answer" maxlength="50"/></label>
+                        <button type="submit"><?= LANG_OK ?></button>
                     </form>
                 </body>
             </html><?php
@@ -114,7 +117,7 @@ if ($loggedIn) {
                     <meta charset="utf-8"/>
                     <link href="./buzzer.css" rel="stylesheet" type="text/css"/>
                     <meta name="viewport" content="width=device-width, user-scalable=no"/>
-                    <title>Buzzer</title>
+                    <title><?= LANG_BUZZER ?></title>
                 </head>
                 <body>
                     <form action="./" method="post">
@@ -139,14 +142,14 @@ if ($loggedIn) {
             <meta charset="utf-8"/>
             <link href="./buzzer.css" rel="stylesheet" type="text/css"/>
             <meta name="viewport" content="width=device-width, user-scalable=no"/>
-            <title>Buzzer</title>
+            <title><?= LANG_BUZZER ?></title>
         </head>
         <body>
             <form action="./" method="post">
-                <label><span>Passcode: </span><input type="password" name="passcode" required="required"/></label>
-                <label><span>Team name: </span><input name="teamname" maxlength="30" required="required" spellcheck=true"/></label>
-                <button name="login">Continue</button>
-                <strong>⚠ Cookies need to be enabled</strong>
+                <label><span><?= LANG_PASSCODE ?>: </span><input type="password" name="passcode" required="required"/></label>
+                <label><span><?= LANG_TEAM_NAME ?>: </span><input name="teamname" maxlength="30" required="required" spellcheck=true"/></label>
+                <button name="login"><?= LANG_CONTINUE ?></button>
+                <strong>⚠ <?= LANG_COOKIES_MUST_BE_ENABLED ?></strong>
             </form>
         </body>
     </html><?php
