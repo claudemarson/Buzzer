@@ -8,16 +8,19 @@ use Buzzer\Locale;
 $db = null;
 $loggedIn = false;
 
+setcookie('cookies-enabled', '?');
+
 if (isset($_COOKIE['team']) && is_numeric($_COOKIE['team'])) {
     
     $db = new Database();
     $teamID = filter_input(INPUT_COOKIE, 'team', FILTER_SANITIZE_NUMBER_INT);
     
-    if ($db->getIsValidTeamID($teamID)){
+    if ($db->getIsValidTeamID($teamID)) {
         $loggedIn = true;
     }
 
-} elseif (isset($_POST['login'], $_POST['teamname'], $_POST['passcode'])) {
+} elseif (isset($_POST['login'], $_POST['teamname'], $_POST['passcode'],
+    $_COOKIE['cookies-enabled'])) {
     
     $db = new Database();
     $teamName = trim(filter_input(INPUT_POST, 'teamname', FILTER_UNSAFE_RAW));
@@ -28,6 +31,7 @@ if (isset($_COOKIE['team']) && is_numeric($_COOKIE['team'])) {
     if ($teamID !== '') {
         $loggedIn = true;
         setcookie('team', $teamID);
+        setcookie('cookies-enabled', '', 1);
     } else {
         $db->close();
     }
@@ -148,8 +152,10 @@ if ($loggedIn) {
             <form action="./" method="post">
                 <label><span><?= LANG_PASSCODE ?>: </span><input type="password" name="passcode" required="required"/></label>
                 <label><span><?= LANG_TEAM_NAME ?>: </span><input name="teamname" maxlength="30" required="required" spellcheck=true"/></label>
+                <?php if (isset($_POST['login']) && !isset($_COOKIE['cookies-enabled'])) : ?>
+                    <strong>⚠ <?= LANG_COOKIES_MUST_BE_ENABLED ?></strong>
+                <?php endif; ?>
                 <button name="login"><?= LANG_CONTINUE ?></button>
-                <strong>⚠ <?= LANG_COOKIES_MUST_BE_ENABLED ?></strong>
             </form>
         </body>
     </html><?php
