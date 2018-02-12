@@ -89,7 +89,7 @@ class Database extends \mysqli
         
         do {
             $fetchStmt = $this->prepare(
-                'SELECT gameRound.ID, answer, teamName '
+                'SELECT gameround.ID, answer, teamName '
                 . 'FROM gameround INNER JOIN team '
                 . '  ON gameround.team=team.ID '
                 . 'WHERE NOT displayed');
