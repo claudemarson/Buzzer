@@ -20,7 +20,7 @@ DROP TABLE IF EXISTS `config`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `config` (
-  `ID` varchar(20) NOT NULL,
+  `ID` varchar(23) NOT NULL,
   `setting` varchar(1) DEFAULT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -32,7 +32,7 @@ CREATE TABLE `config` (
 
 LOCK TABLES `config` WRITE;
 /*!40000 ALTER TABLE `config` DISABLE KEYS */;
-INSERT INTO `config` VALUES ('ClearScreen','0'),('CurrentBuzzerType','1'),('RevealAnswers','0');
+INSERT INTO `config` VALUES ('AnswerVisibility','0'),('AnswerVisibilityChanged','0'),('ClearScreen','0'),('CurrentBuzzerType','1');
 /*!40000 ALTER TABLE `config` ENABLE KEYS */;
 UNLOCK TABLES;
 

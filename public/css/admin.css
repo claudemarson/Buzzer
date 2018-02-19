@@ -1,0 +1,60 @@
+body {
+    font-family: sans-serif;
+    margin: 30px 30px 0px;
+}
+
+h1, h2 {
+    background-color: #2877e6;
+    color: white;
+    padding: 4px 10px;
+    margin: 0px;
+}
+
+h1 {
+    margin-bottom: 30px;
+}
+
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+section {
+    flex: 0 1 30%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+}
+
+section > div {
+    border: 1px solid #2877e6;
+    border-style: none solid solid;
+    flex: 1;
+}
+
+button, label {
+    margin: 12px;
+}
+
+label {
+    display: block;
+}
+
+label.active {
+    background-color: #2877e6;
+    color: white;
+}
+
+.active {
+    outline: 4px solid #2877e6;
+}
+
+button, input {
+    font-size: inherit;
+}
+
+@media all and (max-width: 600px) {
+    .flex-container {
+        flex-direction: column;
+    }
+}

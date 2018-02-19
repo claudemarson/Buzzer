@@ -140,32 +140,62 @@ class Database extends \mysqli
     
     /**
      * Get the visibility of the answers on the screen
-     * @return int 1: hidden, 2: revealed
+     * @return bool true: revealed, false: hidden
      */
-    public function getScreenAnswerVisibility(): int
+    public function getScreenAnswerVisibility(): bool
     {
-        return (int) $this->query(
+        return (bool) $this->query(
             "SELECT setting "
             . "FROM config "
-            . "WHERE ID = 'RevealAnswers'")
+            . "WHERE ID = 'AnswerVisibility'")
             ->fetch_assoc()['setting'];
     }
     
     /**
      * Set the visibility of the answers on the screen
-     * @param int $reveal 0: no action, 1: hide, 2: reveal
+     * @param bool $reveal true: reveal, false: hide
      */
-    public function setScreenAnswerVisibility(int $reveal)
+    public function setScreenAnswerVisibility(bool $reveal)
     {
-        if (($reveal >= 0) && ($reveal <= 2)) {
-            $stmt = $this->prepare(
-                "UPDATE config "
-                . "SET setting=? "
-                . "WHERE ID = 'RevealAnswers'");
-            $stmt->bind_param('i', $reveal);
-            $stmt->execute();
-            $stmt->close();
-        }
+        $stmt = $this->prepare(
+            "UPDATE config "
+            . "SET setting=? "
+            . "WHERE ID = 'AnswerVisibility'");
+        $stmt->bind_param('i', $reveal);
+        $stmt->execute();
+        $stmt->close();
+        
+        $this->setScreenAnswerVisibilityChanged(true);
+    }
+    
+    /**
+     * Get the flag indicating that the answer visibility has been changed and
+     * has not yet been processed by the screen event stream
+     * @return bool true: has changed, false: has not changed
+     */
+    public function getScreenAnswerVisibilityChanged(): bool
+    {
+        return (bool) $this->query(
+            "SELECT setting "
+            . "FROM config "
+            . "WHERE ID = 'AnswerVisibilityChanged'")
+            ->fetch_assoc()['setting'];
+    }
+    
+    /**
+     * Set the flag indicating that the answer visibility has been changed and
+     * has not yet been processed by the screen event stream
+     * @param bool $hasChanged true: has changed, false: has not changed
+     */
+    public function setScreenAnswerVisibilityChanged(bool $hasChanged)
+    {
+        $stmt = $this->prepare(
+            "UPDATE config "
+            . "SET setting=? "
+            . "WHERE ID = 'AnswerVisibilityChanged'");
+        $stmt->bind_param('i', $hasChanged);
+        $stmt->execute();
+        $stmt->close();
     }
     
     /**

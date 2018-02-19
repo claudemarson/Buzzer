@@ -11,22 +11,27 @@ header('Cache-Control: no-cache');
 $db = new Database();
 
 $clearScreen = $db->getClearScreen();
-$answerVisibility = $db->getScreenAnswerVisibility();
+$answerVisibilityHasChanged = $db->getScreenAnswerVisibilityChanged();
 
 if ($clearScreen) {
     // clear the screen
     $db->setClearScreen(false);
     ScreenEventStream::clearScreen();
 
-} elseif ($answerVisibility === 1) {
-    // hide all answers
-    $db->setScreenAnswerVisibility(0);
-    ScreenEventStream::hideAnswers();
+} elseif ($answerVisibilityHasChanged) {
+    // answer visibility has changed
+    $answersVisible = $db->getScreenAnswerVisibility();
+    
+    if (!$answersVisible) {
+        // hide all answers
+        $db->setScreenAnswerVisibilityChanged(false);
+        ScreenEventStream::hideAnswers();
 
-} elseif ($answerVisibility === 2) {
-    // reveal all answers
-    $db->setScreenAnswerVisibility(0);
-    ScreenEventStream::revealAnswers();
+    } else {
+        // reveal all answers
+        $db->setScreenAnswerVisibilityChanged(false);
+        ScreenEventStream::revealAnswers();
+    }
 
 } else {
     // fetch new answers from the database

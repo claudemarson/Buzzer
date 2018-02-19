@@ -76,7 +76,7 @@ if ($loggedIn) {
             <html class="buzzer1">
                 <head>
                     <meta charset="utf-8"/>
-                    <link href="./buzzer.css" rel="stylesheet" type="text/css"/>
+                    <link href="./css/buzzer.css" rel="stylesheet" type="text/css"/>
                     <meta name="viewport" content="width=device-width, user-scalable=no"/>
                     <title><?= LANG_BUZZER ?></title>
                 </head>
@@ -97,7 +97,7 @@ if ($loggedIn) {
             <html class="buzzer2">
                 <head>
                     <meta charset="utf-8"/>
-                    <link href="./buzzer.css" rel="stylesheet" type="text/css"/>
+                    <link href="./css/buzzer.css" rel="stylesheet" type="text/css"/>
                     <meta name="viewport" content="width=device-width, user-scalable=no"/>
                     <title><?= LANG_BUZZER ?></title>
                 </head>
@@ -119,7 +119,7 @@ if ($loggedIn) {
             <html class="buzzer3">
                 <head>
                     <meta charset="utf-8"/>
-                    <link href="./buzzer.css" rel="stylesheet" type="text/css"/>
+                    <link href="./css/buzzer.css" rel="stylesheet" type="text/css"/>
                     <meta name="viewport" content="width=device-width, user-scalable=no"/>
                     <title><?= LANG_BUZZER ?></title>
                 </head>
@@ -144,7 +144,7 @@ if ($loggedIn) {
     <html class="login">
         <head>
             <meta charset="utf-8"/>
-            <link href="./buzzer.css" rel="stylesheet" type="text/css"/>
+            <link href="./css/buzzer.css" rel="stylesheet" type="text/css"/>
             <meta name="viewport" content="width=device-width, user-scalable=no"/>
             <title><?= LANG_BUZZER ?></title>
         </head>
