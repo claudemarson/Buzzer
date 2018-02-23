@@ -2,6 +2,8 @@
 
 namespace Buzzer;
 
+use Buzzer\RandomString;
+
 require_once dirname(__DIR__) . '/config.php';
 
 /**
@@ -17,6 +19,62 @@ class Database extends \mysqli
         parent::__construct(DB_HOST, DB_USERNAME, DB_PASSWORD, 'buzzer');
     }
     
+    /**
+     * Get a list of all teams
+     * @return string[][]
+     */
+    public function getAllTeams()
+    {
+        return $this->query(
+            "SELECT ID, teamName "
+            . "FROM team "
+            . "ORDER BY teamName")
+            ->fetch_all(MYSQLI_ASSOC);
+    }
+    
+    /**
+     * Get a list of all team passcodes
+     * @return string[][]
+     */
+    public function getAllTeamPasscodes()
+    {
+        return $this->query(
+            "SELECT passcode "
+            . "FROM team")
+            ->fetch_all(MYSQLI_ASSOC);
+    }
+    
+    /**
+     * Add a team
+     */
+    public function addTeam()
+    {
+        $teamID = random_int(100000000, 999999999);
+        $passcode = RandomString::randomString(10);
+        
+        $stmt = $this->prepare(
+            'INSERT INTO team (ID, passcode) '
+            . 'VALUES (?, ?)');
+        $stmt->bind_param('is', $teamID, $passcode);
+        $stmt->execute();
+        $stmt->close();
+    }
+
+    /**
+     * Remove a team
+     * @param int $teamID the team's ID
+     */
+    public function removeTeam(int $teamID)
+    {
+        $stmt = $this->prepare(
+            'DELETE FROM team '
+            . 'WHERE ID=? '
+            . 'LIMIT 1');
+        $stmt->bind_param('i', $teamID);
+        $stmt->execute();
+        $stmt->close();
+    }
+
     /**
      * Check whether a team ID is valid
      * @param int $teamID the team's ID

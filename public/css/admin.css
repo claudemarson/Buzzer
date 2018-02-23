@@ -19,8 +19,15 @@ h1 {
     justify-content: space-between;
 }
 
-section {
+.flex-container.three-sections section {
     flex: 0 1 30%;
+}
+
+.flex-container.two-sections section {
+    flex: 0 1 45%;
+}
+
+section {
     display: flex;
     flex-direction: column;
     margin-bottom: 30px;
@@ -32,7 +39,36 @@ section > div {
     flex: 1;
 }
 
-button, label {
+table {
+    border-collapse: collapse;
+    border: 1px solid #2877e6;
+}
+
+thead, tfoot {
+    background-color: #2877e6;
+    color: white;
+}
+
+tbody > tr:nth-child(even) {
+    background-color: #d1e2fa;
+}
+
+tr {
+    line-height: 133%;
+}
+
+th, td {
+    border: 1px solid #2877e6;
+    border-style: none solid;
+    padding: 5px 10px;
+}
+
+.undefined {
+    font-style: italic;
+    color: grey;
+}
+
+.margin > * {
     margin: 12px;
 }
 

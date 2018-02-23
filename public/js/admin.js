@@ -45,6 +45,50 @@ function changeBuzzerType() {
 }
 
 /**
+ * List all teams
+ */
+function listTeams() {
+    fetch("ajax/listteams.php").then(function(response) {
+        response.text().then(function(tableRows) {
+            let teamsTBody = document.getElementById("teams");
+            teamsTBody.innerHTML = tableRows;
+            document.getElementById("team_count").innerText = teamsTBody
+                .childElementCount;
+            teamsTBody.querySelectorAll(".remove-team")
+                .forEach(function(button) {
+                    button.addEventListener("click", removeTeam);
+                });
+        });
+    });
+}
+
+/**
+ * Add a team
+ */
+function addTeam() {
+    fetch("ajax/addteam.php", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+        }
+    }).then(listTeams);
+}
+
+/**
+ * Remove a team
+ * @param {MouseEvent} event
+ */
+function removeTeam(event) {
+    fetch("ajax/removeteam.php", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: "teamid=" + +event.target.parentNode.parentNode.dataset.teamId
+    }).then(listTeams);
+}
+
+/**
  * Initialise the event listeners
  */
 function init() {
@@ -55,6 +99,12 @@ function init() {
         setAnswerVisibility);
     document.getElementById("change_buzzer_type").addEventListener("click",
         changeBuzzerType);
+    document.getElementById("reload_teams").addEventListener("click",
+        listTeams);
+    document.getElementById("add_team").addEventListener("click", addTeam);
+    document.querySelectorAll(".remove-team").forEach(function(button) {
+        button.addEventListener("click", removeTeam);
+    });
 }
 
 init();

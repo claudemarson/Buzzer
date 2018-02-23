@@ -17,6 +17,8 @@ if (isset($_COOKIE['team']) && is_numeric($_COOKIE['team'])) {
     
     if ($db->getIsValidTeamID($teamID)) {
         $loggedIn = true;
+    } else {
+        setcookie('team', '', 1);
     }
 
 } elseif (isset($_POST['login'], $_POST['teamname'], $_POST['passcode'],
