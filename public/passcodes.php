@@ -21,7 +21,7 @@ Locale::loadLanguage();
 <html>
     <head>
         <meta charset="utf-8"/>
-        <link href="./css/passcodes.css" rel="stylesheet" type="text/css"/>
+        <link href="./css/passcodes.css?v2" rel="stylesheet" type="text/css"/>
         <title><?= LANG_PASSCODES_PRINTOUT ?></title>
     </head>
     <body>
