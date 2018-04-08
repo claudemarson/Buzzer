@@ -71,94 +71,10 @@ if ($loggedIn) {
     header('Cache-Control: no-cache');
     
     // show the correct buzzer type
-    switch ($buzzerType) {
-        case 1:
-            // Buzzer
-            ?><!DOCTYPE html>
-            <html class="buzzer1">
-                <head>
-                    <meta charset="utf-8"/>
-                    <link href="./css/buzzer.css" rel="stylesheet" type="text/css"/>
-                    <meta name="viewport" content="width=device-width, user-scalable=no"/>
-                    <title><?= LANG_BUZZER ?></title>
-                </head>
-                <body>
-                    <form action="./" method="post">
-                        <input type="hidden" name="buzzertype" value="1"/>
-                        <input type="hidden" name="team" value="<?= htmlspecialchars($teamID) ?>"/>
-                        <button type="submit" name="answer" value="X">BAZZAAA</button>
-                    </form>
-                </body>
-            </html><?php
+    include "../views/buzzer$buzzerType.php";
 
-            break;
-
-        case 2:
-            // Text field
-            ?><!DOCTYPE html>
-            <html class="buzzer2">
-                <head>
-                    <meta charset="utf-8"/>
-                    <link href="./css/buzzer.css" rel="stylesheet" type="text/css"/>
-                    <meta name="viewport" content="width=device-width, user-scalable=no"/>
-                    <title><?= LANG_BUZZER ?></title>
-                </head>
-                <body>
-                    <form action="./" method="post">
-                        <input type="hidden" name="buzzertype" value="2"/>
-                        <input type="hidden" name="team" value="<?= htmlspecialchars($teamID) ?>"/>
-                        <label><span><?= LANG_ANSWER ?>:</span> <input name="answer" maxlength="50"/></label>
-                        <button type="submit"><?= LANG_OK ?></button>
-                    </form>
-                </body>
-            </html><?php
-
-            break;
-
-        case 3:
-            // 3 options
-            ?><!DOCTYPE html>
-            <html class="buzzer3">
-                <head>
-                    <meta charset="utf-8"/>
-                    <link href="./css/buzzer.css" rel="stylesheet" type="text/css"/>
-                    <meta name="viewport" content="width=device-width, user-scalable=no"/>
-                    <title><?= LANG_BUZZER ?></title>
-                </head>
-                <body>
-                    <form action="./" method="post">
-                        <input type="hidden" name="buzzertype" value="3"/>
-                        <input type="hidden" name="team" value="<?= htmlspecialchars($teamID) ?>"/>
-                        <button type="submit" name="answer" value="A" class="a">A</button>
-                        <button type="submit" name="answer" value="B" class="b">B</button>
-                        <button type="submit" name="answer" value="C" class="c">C</button>
-                    </form>
-                </body>
-            </html><?php
-
-            break;
-
-    }
 } else {
 
     // first visit or incorrect login
-    ?><!DOCTYPE html>
-    <html class="login">
-        <head>
-            <meta charset="utf-8"/>
-            <link href="./css/buzzer.css" rel="stylesheet" type="text/css"/>
-            <meta name="viewport" content="width=device-width, user-scalable=no"/>
-            <title><?= LANG_BUZZER ?></title>
-        </head>
-        <body>
-            <form action="./" method="post">
-                <label><span><?= LANG_PASSCODE ?>: </span><input type="password" name="passcode" required="required"/></label>
-                <label><span><?= LANG_TEAM_NAME ?>: </span><input name="teamname" maxlength="30" required="required" spellcheck=true"/></label>
-                <?php if (isset($_POST['login']) && !isset($_COOKIE['cookies-enabled'])) : ?>
-                    <strong>⚠ <?= LANG_COOKIES_MUST_BE_ENABLED ?></strong>
-                <?php endif; ?>
-                <button name="login"><?= LANG_CONTINUE ?></button>
-            </form>
-        </body>
-    </html><?php
+    include '../views/teamlogin.php';
 }
